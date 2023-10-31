@@ -36,4 +36,3 @@
         <th>question_max_score</th>
     </tr>
 </table>
-
