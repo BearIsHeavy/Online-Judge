@@ -45,7 +45,7 @@ class MySQL {
 
     addUserInfo = async(email, name, password, login_laster_time) => {
         let flag
-        this.#checkoutExists(email)
+        await this.#checkoutExists(email)
         .then(result => {
             flag = result
         }).catch(err => {

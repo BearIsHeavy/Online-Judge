@@ -1,7 +1,6 @@
 const express = require('express')
-const Player = require('./player')
+const Player = require('./VoteRankingList/player')
 const Login = require('./src/Login')
-const { log } = require('console')
 
 const app = express()
 app.use(express.json())
