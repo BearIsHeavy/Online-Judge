@@ -36,3 +36,21 @@
         <th>question_max_score</th>
     </tr>
 </table>
+
+
+### Question Information Databases
+<table>
+    <tr>
+        <th>question_id</th>
+        <th>question_name</th>
+        <th>question_difficulty</th>
+        <th>question_types</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>x plus y</td>
+        <td>easy</td>
+        <td>math</td>
+    </tr>
+</table>
+
