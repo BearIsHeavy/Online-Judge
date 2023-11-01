@@ -13,7 +13,8 @@ class XPlusY {
 
     #execut_C = (filePath, userName) => {
         const promise = new Promise((resolve, rejects) => {
-            exec(`gcc /home/Bear/htmlAndCss/Vote/Question/Xplusy/test.c  -o /home/Bear/htmlAndCss/Vote/Question/Xplusy/test && ./test`, (err, stdout, stderr) => {
+            // exec(`gcc /home/Bear/htmlAndCss/Vote/Question/Xplusy/test.c  -o /home/Bear/htmlAndCss/Vote/Question/Xplusy/test && ./test`, (err, stdout, stderr) => {
+            exec(`gcc ./Xplusy/${filePath}  -o ./Xplusy/${userName} && ./Xplusy/${userName}`, (err, stdout, stderr) => {
                 if(err) {
                     console.log('running C language occur errors throw error' + err + '\n')
                     throw err
@@ -30,11 +31,7 @@ class XPlusY {
     }
 
     #getCorrectAnswer = () => {
-        const resultData = {
-            "1":3,
-            "2":5
-        }
-        return resultData
+        return "hello world"
     }
 
     checkAnswer = async (filePath, userName) => {
