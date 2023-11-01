@@ -1,35 +1,47 @@
-const { exec } = require('child_process')
 const ExecuteC = require('../executeC')
 
-class XPlusY {
+class HelloWord {
     constructor(aboslutlyPath, userId, inputData) {
-        const data = "#include <stdio.h> \n int main() \n { printf(\"hello world\"); return 0; }"
-        this.executeC = new ExecuteC("/home/Bear/OnlieJudge/Question/HelloWord/test.c", "1", data)
+        const data = "#include <stdio.h> \n int main() \n { printf(\"Hello World\"); return 0; }"
+        this.executeC = new ExecuteC("/home/Bear/OnlieJudge/Question/HelloWord/test.c", `${userId}`, data)
+        this.flag = null
     }
 
     // fetch question descrition
     getQuestionDescribtion = () => {
-        const str = "Please calculate the value of x and y"
+        const str = "Please checkout your environment \n please type \"hello Word\""
         return str
     }
 
+    #getCorrectResult = () => {
+        return "Hello Word"
+    }
+
     checkout_c = () => {
+        // if instantiate a class without not all paramets
+        // input abslutly path for exe_function
         this.executeC.execute_c_file()
         .then(result => {
             console.log(result)
+            if (result == this.#getCorrectResult()) {
+                this.flag = true
+                return
+            } else {
+                this.flag = false
+                return
+            }
         })
         .catch(err => {
             console.log(err)
         })
     }
 
+    getFlag = () => { this.flag }
+
 }
 
-module.exports = XPlusY
+module.exports = HelloWord
 
-const T = new XPlusY()
+const T = new HelloWord()
 T.checkout_c()
-// T.execut_C('test.c', 'bear').then(result => console.log(result))
-// T.checkAnswer('test.c', 'bear').then(result => console.log(result)).catch(err => console.log(err))
-// console.log(T.checkAnswer('hello world'))
-// console.log(T.getAnswer())
+console.log(T.getFlag())

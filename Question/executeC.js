@@ -16,6 +16,7 @@ class ExecutC {
     #write_c_file = (_path = this.path, _data = this.data) => {
         fs.writeFileSync(_path, _data, err => {
             if (err) throw err;
+            console.log('file created ..')
         })
     }
 
@@ -56,6 +57,6 @@ module.exports = ExecutC
 
 //Test
 // const data = "#include <stdio.h> \n int main() \n { printf(\"hello world\"); return 0; }"
-// const execute = new ExecutC("/home/Bear/OnlieJudge/Question/Xplusy/test.c", "1", data)
+// const execute = new ExecutC("/home/Bear/OnlieJudge/Question/HelloWord/test.c", "1", data)
 // execute.execute_c_file().then(result => console.log(result))
 

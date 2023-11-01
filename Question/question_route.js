@@ -6,9 +6,10 @@ route.get('/question/home', (req, res) => {
 })
 
 route.get('/question/helloword', async (req, res) => {
-    const XPlusY = require('./HelloWord/HelloWord')
-    const xplusy = new XPlusY()
-    
+    const HelloWord = require('./HelloWord/HelloWord')
+    const helloword = new HelloWord(1,1,1)
+    await helloword.checkout_c()
+    console.log(helloword.getFlag())
 })
 
 const PORT = '8089'

@@ -10,5 +10,5 @@ creatTable_UserInfo="CREATE TABLE UserInfo (
     login_laster_time TIMESTAMP
 )"
 
-# mysql -uroot -D${DataBase} -e  "$creatTable_UserInfo; "
+mysql -ubear -p123 -D${DataBase} -e "$creatTable_UserInfo; "
 
