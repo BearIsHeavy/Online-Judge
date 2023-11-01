@@ -10,7 +10,7 @@ route.get('/vote/home', (req, res) => {
 const player = []
 player.push(new Player('wzh', 1, 'i love bear'))
 player.push(new Player('xqq', 2, 'i love wzh'))
-player.push(new Player('yc', 3, 'i love wzh'))
+player.push(new Player('yc', 3, 'i love ...'))
 
 
 route.get('/vote/welcome', (req, res) => {

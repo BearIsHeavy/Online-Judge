@@ -1,5 +1,4 @@
 const { exec } = require('child_process')
-const path = require('path')
 
 class XPlusY {
     constructor() {
@@ -14,11 +13,10 @@ class XPlusY {
     #execut_C = (filePath, userName) => {
         const promise = new Promise((resolve, rejects) => {
             // exec(`gcc /home/Bear/htmlAndCss/Vote/Question/Xplusy/test.c  -o /home/Bear/htmlAndCss/Vote/Question/Xplusy/test && ./test`, (err, stdout, stderr) => {
-            exec(`gcc ./Xplusy/${filePath}  -o ./Xplusy/${userName} && ./Xplusy/${userName}`, (err, stdout, stderr) => {
+            exec(`gcc ./Question/Xplusy/${filePath}  -o ./Question/Xplusy/${userName} && ./Question/Xplusy/${userName}`, (err, stdout, stderr) => {
                 if(err) {
                     console.log('running C language occur errors throw error' + err + '\n')
                     throw err
-                    rejects(err)
                 }
                 if(stderr) {
                     console.log('running C language occur errors' + stderr + '\n')
@@ -37,6 +35,7 @@ class XPlusY {
     checkAnswer = async (filePath, userName) => {
         // filePath = path.basename(filePath)
         let correct_answer
+
         await this.#execut_C(filePath, userName)
         .then(result => {
             correct_answer = result
@@ -44,7 +43,7 @@ class XPlusY {
         .catch(err => {
             console.log("occur errors" + err)
         })
-        // console.log(correct_answer)
+
         return new Promise((resolve, rejects) => {
             // const answer = this.#getCorrectAnswer()
             const answer = "hello world"
@@ -56,7 +55,9 @@ class XPlusY {
         })
     }
 
-
+    deleteFile = () => {
+        
+    }
 
 }
 

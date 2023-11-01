@@ -4,6 +4,7 @@
 
 ### 🔥 DataBase Struct
 
+#### 🐻‍❄️ UserInfo Table
 <table>
     <tr>
         <th>id</th>
@@ -27,18 +28,25 @@
 > `email` and `password` used by to verify account and password <br>
 > `email` will be used froeign key to connect other databases
 
-#### User Question Database
+#### 🧸 userScore Table
 <table>
     <tr>
         <th>email</th>
-        <th>question_serial_number</th>
+        <th>question_id</th>
         <th>question_name</th>
         <th>question_max_score</th>
+        <th>
+    </tr>
+    <tr>
+        <td>2650183131@qq.com</td>
+        <td>1</td>
+        <td>xplusy</td>
+        <td>100</td>
     </tr>
 </table>
 
 
-### Question Information Databases
+### 🦔 questionInfo Table
 <table>
     <tr>
         <th>question_id</th>
@@ -53,4 +61,9 @@
         <td>math</td>
     </tr>
 </table>
+
+> 🗺️
+> 1. The `User Question Database` key `question_id` is refering the `Question Information Databases` key `quesstion_di` 🌏
+> 1. The `User Question Database` key `email` is referring the `UserInfo DataBase` key `email` ✈️
+
 
