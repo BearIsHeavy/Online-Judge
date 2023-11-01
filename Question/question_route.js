@@ -5,18 +5,10 @@ route.get('/question/home', (req, res) => {
     res.status(200).send("test")
 })
 
-route.get('/question/xplusy', async (req, res) => {
-    const XPlusY = require('./Xplusy/xplusy_1')
+route.get('/question/helloword', async (req, res) => {
+    const XPlusY = require('./HelloWord/HelloWord')
     const xplusy = new XPlusY()
-    xplusy.checkAnswer('test.c', 'bear')
-    .then(result => {
-        console.log(result)
-        res.status(200).send(result)
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(404).send('occor errors')
-    })
+    
 })
 
 const PORT = '8089'
