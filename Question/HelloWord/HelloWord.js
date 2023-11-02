@@ -1,11 +1,11 @@
 const ExecuteC = require('../executeC')
 const fs = require('fs')
+const path = require('path')
 
 class HelloWord {
-    constructor(aboslutlyPath, userId, inputData) {
-        const data = "#include <stdio.h> \n int main() \n { printf(\"Hello Word\"); return 0; }"
-        // this.executeC = new ExecuteC("/home/Bear/htmlAndCss/Vote/Question/HelloWord/test.c", `${userId}`, data)
-        this.executeC = new ExecuteC("/test.c", `${userId}`, data)
+    constructor(relativePath, userId, inputData) {
+        // this.executeC = new ExecuteC("/HelloWord/test.c", `${userId}`, data)
+        this.executeC = new ExecuteC(relativePath, userId, inputData)
         this.flag = null
     }
 
@@ -21,8 +21,21 @@ class HelloWord {
 
     checkout_c = async() => {
         // if instantiate a class without not all paramets
-        // input abslutly path for exe_function
-        await this.executeC.execute_c_file()
+        // input relative path for exe_function
+        this.executeC.execute_c_file()
+        .then(result => {
+            console.log(result)
+            while (true) {
+                const _path = path.join(__dirname + '/output')
+                // console.log(_path)
+                if (fs.existsSync(_path) == false) continue
+                fs.unlinkSync(path.join(__dirname + "/output"))
+                break
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     getFlag = () => { 
@@ -37,6 +50,6 @@ class HelloWord {
 
 module.exports = HelloWord
 
-// const T = new HelloWord(1,1,1)
+// const T = new HelloWord()
 // T.checkout_c()
 // console.log(T.getFlag())
