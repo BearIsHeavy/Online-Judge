@@ -4,11 +4,16 @@ const _path = require('path')
 
 class ExecutC {
 
-    constructor(abslutlyPath, userId, data) {
-        this.id = userId
-        this.path = abslutlyPath
-        this.dirname = _path.dirname(abslutlyPath)
-        this.fileName = _path.basename(abslutlyPath)
+    constructor(relativePath, userId, data) {
+        //this id is User Id
+        this.id = userId    
+        //this path is obslutly path
+        this.path = _path.join(__dirname + relativePath) 
+        // parent file path
+        this.dirname = _path.join(__dirname + _path.dirname(relativePath)) 
+        // fetch file name
+        this.fileName = _path.basename(relativePath)
+        // fetch data
         this.data = data
     }
 
@@ -23,6 +28,7 @@ class ExecutC {
 
 
     // delete existing cache file
+    // include remove c file, and remove c.exe file
     #delete_c_file = (_path = this.path, _dirname = this.dirname, _id = this.id) => {
         fs.unlink(_path, err => {
             if (err) throw err
@@ -34,18 +40,30 @@ class ExecutC {
         })
     }
 
+    //write you code to
+    #write_output =(_fileName, _data = null) => {
+        const _path_ = this.dirname + _fileName;
+        fs.writeFileSync(_path_, _data, err => {
+            if (err) throw err
+            console.log(`${_data} loaded to ${this.dirname}+/${_fileName}`)
+        })
+    }
+
     // execute a file create a executing file
+    // and write running result to output file
     execute_c_file = (_path = this.path, _dirname = this.dirname, _id = this.id) => {
         this.#write_c_file()
         return new Promise((resolve, rejects) => {
             // const command = `gcc ${this.path} -o ${this.dirname}/${this.id} && . ${this.dirname}/${this.id}`
-            const command = `gcc ${_path} -o ${_dirname}/${_id} && ./HelloWord/${_id}`
+            const command = `gcc ${_path} -o ${_dirname}/${_id} && ${_dirname}/${_id}`
             exec(command, (error, stdout, stderr) => {
                 if (error) throw error
                 if (stderr) {
-                    console.log("stand error: " + stderr)
+                    // console.log("stand error: " + stderr)
+                    this.#write_output(_path, stderr)
                     resolve(stderr)
                 }
+                this.#write_output('/output', stdout)
                 this.#delete_c_file()
                 resolve(stdout)
             })

@@ -1,9 +1,11 @@
 const ExecuteC = require('../executeC')
+const fs = require('fs')
+const path = require('path')
 
 class HelloWord {
-    constructor(aboslutlyPath, userId, inputData) {
-        const data = "#include <stdio.h> \n int main() \n { printf(\"Hello World\"); return 0; }"
-        this.executeC = new ExecuteC("/home/Bear/OnlieJudge/Question/HelloWord/test.c", `${userId}`, data)
+    constructor(relativePath, userId, inputData) {
+        // this.executeC = new ExecuteC("/HelloWord/test.c", `${userId}`, data)
+        this.executeC = new ExecuteC(relativePath, userId, inputData)
         this.flag = null
     }
 
@@ -23,12 +25,13 @@ class HelloWord {
         this.executeC.execute_c_file()
         .then(result => {
             console.log(result)
-            if (result == this.#getCorrectResult()) {
-                this.flag = true
-                return
-            } else {
-                this.flag = false
-                return
+            while (true) {
+                const _path = path.join(__dirname + '/output')
+                // console.log(_path)
+                if (fs.existsSync(_path) == false) continue
+                // console.log(result)
+                fs.unlinkSync(_path)
+                break
             }
         })
         .catch(err => {
@@ -42,6 +45,6 @@ class HelloWord {
 
 module.exports = HelloWord
 
-const T = new HelloWord()
-T.checkout_c()
-console.log(T.getFlag())
+// const T = new HelloWord()
+// T.checkout_c()
+// console.log(T.getFlag())
