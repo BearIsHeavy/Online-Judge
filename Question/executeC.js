@@ -4,11 +4,12 @@ const _path = require('path')
 
 class ExecutC {
 
-    constructor(abslutlyPath, userId, data) {
+    constructor(relativePath, userId, data) {
         this.id = userId
-        this.path = abslutlyPath
-        this.dirname = _path.dirname(abslutlyPath)
-        this.fileName = _path.basename(abslutlyPath)
+        this.path = _path.join(__dirname + relativePath)
+        // this.dirname = _path.dirname(abslutlyPath)
+        this.dirname = _path.join(__dirname)
+        this.fileName = _path.basename(relativePath)
         this.data = data
     }
 
@@ -35,17 +36,26 @@ class ExecutC {
     }
 
     // execute a file create a executing file
-    execute_c_file = (_path = this.path, _dirname = this.dirname, _id = this.id) => {
+    execute_c_file = (_path = this.path, _dirname = this.dirname, _id = this.id, _data = this.data) => {
+
+        // create a c file perpare running c 
         this.#write_c_file()
+
+        // running c file
         return new Promise((resolve, rejects) => {
             // const command = `gcc ${this.path} -o ${this.dirname}/${this.id} && . ${this.dirname}/${this.id}`
-            const command = `gcc ${_path} -o ${_dirname}/${_id} && ./HelloWord/${_id}`
+            const command = `gcc ${_path} -o ${_dirname}/${_id} && ./${_id}`
             exec(command, (error, stdout, stderr) => {
                 if (error) throw error
                 if (stderr) {
                     console.log("stand error: " + stderr)
                     resolve(stderr)
                 }
+                // write running c file data to a file (output)
+                fs.writeFileSync(_dirname + "/output", stdout, err => {
+                    if (err) throw err
+                })
+                // delete c cach file
                 this.#delete_c_file()
                 resolve(stdout)
             })
@@ -57,6 +67,6 @@ module.exports = ExecutC
 
 //Test
 // const data = "#include <stdio.h> \n int main() \n { printf(\"hello world\"); return 0; }"
-// const execute = new ExecutC("/home/Bear/OnlieJudge/Question/HelloWord/test.c", "1", data)
+// const execute = new ExecutC("/home/Bear/htmlAndCss/Vote/Question/HelloWord/test.c", "1", data)
 // execute.execute_c_file().then(result => console.log(result))
 
